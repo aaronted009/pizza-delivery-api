@@ -13,7 +13,7 @@ class SignUpModel(BaseModel):
 
     class Config:
         orm_mode = True
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "username": "johndoe",
                 "email": "johndoe@gmail.com",
