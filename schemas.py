@@ -1,5 +1,9 @@
 from pydantic import BaseModel
 from typing import Optional
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 
 # validation schema
@@ -25,3 +29,7 @@ class SignUpModel(BaseModel):
             ]
         }
     }
+
+
+class Settings(BaseModel):
+    authjwt_secret_key: str = os.getenv("AUTH_SECRET_KEY")
