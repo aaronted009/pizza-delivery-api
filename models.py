@@ -1,3 +1,5 @@
+import random
+import uuid
 from database import Base
 from sqlalchemy import Column, Integer, Boolean, Text, String, ForeignKey
 from sqlalchemy.orm import relationship
@@ -13,6 +15,23 @@ class User(Base):
     is_staff = Column(Boolean, default=False)
     is_active = Column(Boolean, default=False)
     orders = relationship("Order", back_populates="user")
+
+    def __init__(
+        self,
+        username: str = "",
+        email: str = "",
+        password: str = "",
+        is_staff: bool = False,
+        is_active: bool = False,
+    ):
+        self.id = random.randint(
+            0, 5000
+        )  # TODO : find a better way to do this (id is supposed to be optional, see schemas.py). Plus random 'ranged' generation of id, not the best.
+        self.username = username
+        self.email = email
+        self.password = password
+        self.is_staff = is_staff
+        self.is_active = is_active
 
     def __repr__(self):
         return f"<User {self.username}"
