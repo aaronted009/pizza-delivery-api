@@ -33,3 +33,8 @@ class SignUpModel(BaseModel):
 
 class Settings(BaseModel):
     authjwt_secret_key: str = os.getenv("AUTH_SECRET_KEY")
+
+
+class LoginModel(BaseModel):
+    username: str
+    password: str
