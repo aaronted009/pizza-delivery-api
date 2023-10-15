@@ -75,9 +75,9 @@ async def list_all_orders(authorize: AuthJWT = Depends()):
 
 
 @order_router.get("/orders/{id}")
-async def get_order_by_id(id: int, Authorize: AuthJWT = Depends()):
+async def get_order_by_id(id: int, authorize: AuthJWT = Depends()):
     try:
-        Authorize.jwt_required()
+        authorize.jwt_required()
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid Token"
