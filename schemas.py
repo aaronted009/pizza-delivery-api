@@ -15,20 +15,17 @@ class SignUpModel(BaseModel):
     is_staff: Optional[bool]
     is_active: Optional[bool]
 
-    model_config = {
-        "json_schema_extra": {
-            "examples": [
-                {
-                    "id": 0,  # TODO : find a better way to do this (id is supposed to be optional)
-                    "username": "janedoe",
-                    "email": "janedoe@gmail.com",
-                    "password": "password",
-                    "is_staff": False,
-                    "is_active": True,
-                }
-            ]
+    class Config:
+        orm_mode = True
+        schema_extra = {
+            "example": {
+                "username": "johndoe",
+                "email": "johndoe@gmail.com",
+                "password": "password",
+                "is_staff": False,
+                "is_active": True,
+            }
         }
-    }
 
 
 class Settings(BaseModel):
