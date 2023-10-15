@@ -96,3 +96,19 @@ async def get_order_by_id(id: int, authorize: AuthJWT = Depends()):
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="User not alowed to carry out request",
     )
+
+
+@order_router.get("/user/orders")
+async def get_user_orders(authorize: AuthJWT = Depends()):
+    try:
+        authorize.jwt_required()
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid Token"
+        )
+
+    user = authorize.get_jwt_subject()
+
+    current_user = session.query(User).filter(User.username == user).first()
+
+    return jsonable_encoder(current_user.orders)
